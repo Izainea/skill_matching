@@ -9,10 +9,8 @@ import spacy
 import re
 import spacy_streamlit
 
-models = ["es_core_news_lg"]
-nlp=spacy_streamlit.load('es_core_news_lg')
-lemmatizer = nlp.get_pipe("lemmatizer")
-sw=list(nlp.Defaults.stop_words)
+sw=pd.read_csv('https://raw.githubusercontent.com/Izainea/skill_matching/main/data/sw.csv')
+sw=list(sw['vacias'])
 
 DF=pd.read_csv('https://raw.githubusercontent.com/analiticaSED/skill_matching/main/data/datacompare.csv?token=GHSAT0AAAAAABWYMXYEEELJ3YHBCVRZLBLCYWW23UQ')
 DF_dd=DF.loc[DF['NOMBRE DEL PROGRAMA '].drop_duplicates().index]
