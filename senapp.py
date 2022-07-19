@@ -5,9 +5,7 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.feature_extraction.text import CountVectorizer
 import streamlit as st
-import spacy
 import re
-import spacy_streamlit
 
 sw=pd.read_csv('https://raw.githubusercontent.com/Izainea/skill_matching/main/data/sw.csv')
 sw=list(sw['vacias'])
