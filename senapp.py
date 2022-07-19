@@ -10,7 +10,7 @@ import re
 import spacy_streamlit
 
 models = ["es_core_news_lg"]
-nlp=spacy_streamlit.load('es_core_news_lg')
+nlp=spacy.load('es_core_news_lg')
 lemmatizer = nlp.get_pipe("lemmatizer")
 sw=list(nlp.Defaults.stop_words)
 
