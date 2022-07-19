@@ -78,9 +78,9 @@ def recomendador(j):
     except:
         return {"Resultado":"Nada que recomendar"}
 
-st.title("SENA")
-st.header("SDDE")
-name = st.text_input("Ingrese productos", "Type Here ...")
+st.title("RECOMENDACIÓN CURSOS SENA")
+st.header("Grupo de Analítica SDDE")
+name = st.text_input("Ingrese un perfil, una vacante o una descripción breve de sus intereses", "Type Here ...")
 if(st.button('Submit')):
     result = recomendador(name)
     result=pd.DataFrame(result)
