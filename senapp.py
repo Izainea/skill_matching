@@ -73,10 +73,10 @@ def recomendador(j):
         if dis[0]>0.005:
             return dici
         else:
-            return {"Resultado":"Nada que recomendar"}
+            return ["Nada que recomendar"]
         
     except:
-        return {"Resultado":"Nada que recomendar"}
+        return ["Nada que recomendar"]
 
 st.title("RECOMENDACIÓN CURSOS SENA")
 st.header("Grupo de Analítica SDDE")
