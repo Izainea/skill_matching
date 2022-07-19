@@ -10,7 +10,7 @@ import re
 sw=pd.read_csv('https://raw.githubusercontent.com/Izainea/skill_matching/main/data/sw.csv')
 sw=list(sw['vacias'])
 
-DF=pd.read_csv('https://raw.githubusercontent.com/analiticaSED/skill_matching/main/data/datacompare.csv?token=GHSAT0AAAAAABWYMXYEEELJ3YHBCVRZLBLCYWW23UQ')
+DF=pd.read_csv('https://raw.githubusercontent.com/Izainea/skill_matching/main/data/datacompare.csv')
 DF_dd=DF.loc[DF['NOMBRE DEL PROGRAMA '].drop_duplicates().index]
 DF_dd['Analisis']=DF_dd['Analisis'].str.upper().str.replace('TRABAJO ',' ').str.replace('SEGURO ',' ').str.replace(' EN ',' ').str.replace(' PARA ',' ').str.replace(' DE ',' ').str.replace(' Y ',' ').str.replace(' LAS ',' ').str.replace(' LOS ',' ').str.replace(' EL ',' ').str.replace(' LA ',' ').str.replace(' BASICO ',' ').str.replace(' OPERATIVO ',' ').str.replace('  ',' ')
 
