@@ -114,15 +114,17 @@ if(st.button('Submit')):
             'fg_color': '#FFFFFF',
             'bg_color': '#475ea6',
             'border': 1})
-        worksheet.write_row('A1', result2.columns,header_format)
-        worksheet.write_column('B2', result2['Proveedor'])
-        worksheet.write_column('C2', result2['Descripción del curso'])
-        worksheet.write_column('D2', result2['Nombre del curso (MINUSC)'])
-        worksheet.write_column('E2', result2['Número de horas de la formación'])
-        worksheet.write_column('F2', result2['Tipo de certificado'])
-        worksheet.write_column('G2', result2['Temática'])
-        worksheet.write_column('H2', result2['Grupo'])
-        worksheet.write_column('I2', result2['Sector de oportunidad ocupacional'])
+        columnas=['Proveedor','Descripción del curso','Nombre del curso','Número de horas','Tipo de Certificación'
+        'Temática','Grupo','Sector de oportunidad ocupacional']
+        worksheet.write_row('A1',columnas,header_format)
+        worksheet.write_column('A2', result2['Proveedor'])
+        worksheet.write_column('B2', result2['Descripción del curso'])
+        worksheet.write_column('C2', result2['Nombre del curso (MINUSC)'])
+        worksheet.write_column('D2', result2['Número de horas de la formación'])
+        worksheet.write_column('E2', result2['Tipo de certificado'])
+        worksheet.write_column('F2', result2['Temática'])
+        worksheet.write_column('G2', result2['Grupo'])
+        worksheet.write_column('H2', result2['Sector de oportunidad ocupacional'])
         workbook.close()
 
         st.table(result)
