@@ -114,7 +114,7 @@ if(st.button('Submit')):
             'fg_color': '#FFFFFF',
             'bg_color': '#475ea6',
             'border': 1})
-        columnas=['Proveedor','Descripción del curso','Nombre del curso','Número de horas','Tipo de Certificación'
+        columnas=['Proveedor','Descripción del curso','Nombre del curso','Número de horas','Tipo de Certificación',
         'Temática','Grupo','Sector de oportunidad ocupacional']
         worksheet.write_row('A1',columnas,header_format)
         worksheet.write_column('A2', result2['Proveedor'])
