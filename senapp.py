@@ -108,12 +108,7 @@ if(st.button('Submit')):
     else:
         workbook = xlsxwriter.Workbook(output, {'in_memory': True})
         worksheet = workbook.add_worksheet('Cursos')
-        header_format = workbook.add_format({    'bold': True,
-            'text_wrap': True,
-            'valign': 'top',
-            'fg_color': '#FFFFFF',
-            'bg_color': '#475ea6',
-            'border': 1})
+        header_format = workbook.add_format({'bold': True,'text_wrap': True,'valign': 'top','fg_color': '#FFFFFF','bg_color': '#475ea6', 'border': 1})
         columnas=['Proveedor','Descripción del curso','Nombre del curso','Número de horas','Tipo de Certificación',
         'Temática','Grupo','Sector de oportunidad ocupacional']
         worksheet.write_row('A1',columnas,header_format)
