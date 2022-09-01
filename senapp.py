@@ -13,8 +13,7 @@ sw=list(sw['vacias'])
 DF=pd.read_csv('https://raw.githubusercontent.com/Izainea/skill_matching/main/data/datacompare.csv')
 DF_dd=DF.loc[DF['NOMBRE DEL PROGRAMA '].drop_duplicates().index]
 DF_con=pd.read_csv('https://raw.githubusercontent.com/Izainea/skill_matching/main/data/Consolidado_Cursos_Sena_2022.csv')
-columns=DF_con.columns
-columns.remove('Descripción del curso')
+columns=[i for i in DF_con.columns if i.count('Descripción')==0]
 DF_con['Nombre del curso']=DF_con['Nombre del curso (MINUSC)'].str.upper()+" "+DF_con['Palabras Clave'].str.upper()
 DF_con['Nombre del curso']=DF_con['Nombre del curso'].str.upper().str.replace('TRABAJO ',' ').str.replace('SEGURO ',' ').str.replace(' EN ',' ').str.replace(' PARA ',' ').str.replace(' DE ',' ').str.replace(' Y ',' ').str.replace(' LAS ',' ').str.replace(' LOS ',' ').str.replace(' EL ',' ').str.replace(' LA ',' ').str.replace(' BASICO ',' ').str.replace(' OPERATIVO ',' ').str.replace('  ',' ')
 
