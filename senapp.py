@@ -73,8 +73,9 @@ def recomendador(j,n):
     try: 
         best_index,dis = get_recommendations_tfidf(j.upper(), tfidf_mat,n)
         dici=DF_con[columns].iloc[best_index].to_dict()
+        dici2=DF_con[columns+['Descripción del curso']].iloc[best_index].to_dict()
         if dis[0]>0.005:
-            return dici
+            return dici,dici2
         else:
             return ["Nada que recomendar"]
         
@@ -93,10 +94,10 @@ document=st.number_input('Documento de interesado: ', min_value=1000000, max_val
 name = st.text_input("Ingrese un perfil, una vacante o una descripción breve de sus intereses: ", "")
 number = st.number_input('Cuantos cursos desea recomendar: ', min_value=1, max_value=20, value=5)
 if(st.button('Submit')):
-    result = recomendador(name,number)
+    result,result2 = recomendador(name,number)
     result=pd.DataFrame(result)
     st.table(result)
-    csv = convert_df(result)
+    csv = convert_df(result2)
     st.download_button(
      label="Descargue CSV",
      data=csv,
