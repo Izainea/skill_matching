@@ -81,11 +81,24 @@ def recomendador(j,n):
     except:
         return ["Nada que recomendar"]
 
+
+@st.cache
+def convert_df(df):
+     # IMPORTANT: Cache the conversion to prevent computation on every rerun
+     return df.to_csv().encode('utf-8')
+
 st.title("RECOMENDACIÓN CURSOS SENA")
 st.header("Grupo de Analítica SDDE")
 name = st.text_input("Ingrese un perfil, una vacante o una descripción breve de sus intereses: ", "")
 number = st.number_input('Cuantos cursos desea recomendar: ', min_value=1, max_value=20, value=5)
+document=st.number_input('Cuantos cursos desea recomendar: ', min_value=1000000, max_value=10000000000)
 if(st.button('Submit')):
-    result = recomendador(name,number)
+    result = recomendador(name,number,document)
     result=pd.DataFrame(result)
     st.table(result)
+    csv = convert_df(result)
+    st.download_button(
+     label="Descargue CSV",
+     data=csv,
+     file_name='Recomendación_'+str(document)+'.csv',
+     mime='text/csv')
