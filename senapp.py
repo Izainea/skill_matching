@@ -112,7 +112,7 @@ if(st.button('Submit')):
         worksheet.write_column('B1', result2['Proveedor'])
         worksheet.write_column('C1', result2['Descripción del curso'])
         worksheet.write_column('D1', result2['Nombre del curso (MINUSC)'])
-        worksheet.write_column('E1', result2['Número de horas'])
+        worksheet.write_column('E1', result2['Número de horas de la formación'])
         worksheet.write_column('F1', result2['Tipo de certificado'])
         worksheet.write_column('G1', result2['Temática'])
         worksheet.write_column('H1', result2['Grupo'])
