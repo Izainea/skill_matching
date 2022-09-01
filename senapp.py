@@ -126,7 +126,7 @@ if(st.button('Submit')):
         st.table(result)
         csv = convert_df(result2)
     st.download_button(
-            label="Descargue CSV",
+            label="Descargue Excel",
             data=csv,
-            file_name='Recomendación_'+str(document)+'.csv',
+            file_name='Recomendación_'+str(document)+'.xlsx',
             mime='text/csv')
