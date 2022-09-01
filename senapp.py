@@ -7,7 +7,6 @@ from sklearn.feature_extraction.text import CountVectorizer
 import streamlit as st
 import re
 from io import BytesIO
-from pyxlsb import open_workbook as open_xlsb
 
 sw=pd.read_csv('https://raw.githubusercontent.com/Izainea/skill_matching/main/data/sw.csv')
 sw=list(sw['vacias'])
