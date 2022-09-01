@@ -108,7 +108,7 @@ if(st.button('Submit')):
     else:
         workbook = xlsxwriter.Workbook(output, {'in_memory': True})
         worksheet = workbook.add_worksheet('Cursos')
-        worksheet.write('A1', result2.columns)
+        worksheet.write_row('A1', result2.columns)
         worksheet.write_column('B2', result2['Proveedor'])
         worksheet.write_column('C2', result2['Descripción del curso'])
         worksheet.write_column('D2', result2['Nombre del curso (MINUSC)'])
