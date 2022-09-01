@@ -89,7 +89,7 @@ def convert_df(df):
 
 st.title("RECOMENDACIÓN CURSOS SENA")
 st.header("Grupo de Analítica SDDE")
-document=st.number_input('Documento de interesado: ', min_value=1000000, max_value=10000000000,value=0)
+document=st.number_input('Documento de interesado: ', min_value=1000000, max_value=10000000000,value=1000000000)
 name = st.text_input("Ingrese un perfil, una vacante o una descripción breve de sus intereses: ", "")
 number = st.number_input('Cuantos cursos desea recomendar: ', min_value=1, max_value=20, value=5)
 if(st.button('Submit')):
