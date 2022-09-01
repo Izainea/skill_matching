@@ -97,6 +97,7 @@ number = st.number_input('Cuantos cursos desea recomendar: ', min_value=1, max_v
 if(st.button('Submit')):
     result,result2 = recomendador(name,number)
     result=pd.DataFrame(result)
+    result2=pd.DataFrame(result2)
     st.table(result)
     csv = convert_df(result2)
     st.download_button(
