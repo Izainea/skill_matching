@@ -12,7 +12,10 @@ sw=list(sw['vacias'])
 
 DF=pd.read_csv('https://raw.githubusercontent.com/Izainea/skill_matching/main/data/datacompare.csv')
 DF_dd=DF.loc[DF['NOMBRE DEL PROGRAMA '].drop_duplicates().index]
-DF_dd['Analisis']=DF_dd['Analisis'].str.upper().str.replace('TRABAJO ',' ').str.replace('SEGURO ',' ').str.replace(' EN ',' ').str.replace(' PARA ',' ').str.replace(' DE ',' ').str.replace(' Y ',' ').str.replace(' LAS ',' ').str.replace(' LOS ',' ').str.replace(' EL ',' ').str.replace(' LA ',' ').str.replace(' BASICO ',' ').str.replace(' OPERATIVO ',' ').str.replace('  ',' ')
+DF_con=pd.read_excel('https://github.com/Izainea/skill_matching/raw/main/data/Consolidado_Cursos_Sena_2022.xlsx')
+columns=DF_con.columns
+DF_con['Nombre del curso']=DF_con['Nombre del curso (MINUSC)'].str.upper()+" "+DF_con['Palabras Clave'].str.upper()
+DF_con['Nombre del curso']=DF_con['Nombre del curso'].str.upper().str.replace('TRABAJO ',' ').str.replace('SEGURO ',' ').str.replace(' EN ',' ').str.replace(' PARA ',' ').str.replace(' DE ',' ').str.replace(' Y ',' ').str.replace(' LAS ',' ').str.replace(' LOS ',' ').str.replace(' EL ',' ').str.replace(' LA ',' ').str.replace(' BASICO ',' ').str.replace(' OPERATIVO ',' ').str.replace('  ',' ')
 
 
 from sklearn.metrics.pairwise import cosine_similarity
@@ -41,7 +44,7 @@ def extract_best_indices(m, topk, mask=None):
     return best_index,dis
 
 
-def get_recommendations_tfidf(sentence, tfidf_mat):
+def get_recommendations_tfidf(sentence, tfidf_mat,n):
     
     """
     Return the database sentences in order of highest cosine similarity relatively to each 
@@ -54,7 +57,7 @@ def get_recommendations_tfidf(sentence, tfidf_mat):
     mat = cosine_similarity(embed_query, tfidf_mat)
     
     # Best cosine distance for each token independantly
-    best_index,dis = extract_best_indices(mat, topk=5)
+    best_index,dis = extract_best_indices(mat, topk=n)
     
     return best_index,dis
 
@@ -62,14 +65,14 @@ def get_recommendations_tfidf(sentence, tfidf_mat):
 
 # Fit TFIDF
 vectorizer = TfidfVectorizer(stop_words=sw) 
-tfidf_mat = vectorizer.fit_transform(DF_dd['Analisis'].str.upper()) # -> (num_sentences, num_vocabulary)
+tfidf_mat = vectorizer.fit_transform(DF_con['Nombre del curso'].fillna('NADA').str.upper()) # -> (num_sentences, num_vocabulary)
 Lista=[]
 Lista2=[]
 
-def recomendador(j):
+def recomendador(j,n):
     try: 
-        best_index,dis = get_recommendations_tfidf(j.upper(), tfidf_mat)
-        dici=DF_dd[['NOMBRE DEL PROGRAMA ','SECTOR(ES) DE OPORTUNIDAD OCUPACIONAL']].iloc[best_index].to_dict()
+        best_index,dis = get_recommendations_tfidf(j.upper(), tfidf_mat,n)
+        dici=DF_con[columns].iloc[best_index].to_dict()
         if dis[0]>0.005:
             return dici
         else:
@@ -81,7 +84,8 @@ def recomendador(j):
 st.title("RECOMENDACIÓN CURSOS SENA")
 st.header("Grupo de Analítica SDDE")
 name = st.text_input("Ingrese un perfil, una vacante o una descripción breve de sus intereses", "Type Here ...")
+number = st.number_input('Cuantos cursos desea recomendar', min_value=1, max_value=20, value=1)
 if(st.button('Submit')):
-    result = recomendador(name)
+    result = recomendador(name,number)
     result=pd.DataFrame(result)
     st.table(result)
