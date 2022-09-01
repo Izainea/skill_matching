@@ -4,8 +4,13 @@ import numpy as np
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.feature_extraction.text import CountVectorizer
+import xlsxwriter
+from io import BytesIO
 import streamlit as st
 import re
+
+
+output = BytesIO()
 
 sw=pd.read_csv('https://raw.githubusercontent.com/Izainea/skill_matching/main/data/sw.csv')
 sw=list(sw['vacias'])
@@ -98,10 +103,22 @@ if(st.button('Submit')):
     result,result2 = recomendador(name,number)
     result=pd.DataFrame(result)
     result2=pd.DataFrame(result2)
-    st.table(result)
-    csv = convert_df(result2)
+    if result.empty:
+        st.write("No se encontraron resultados")
+    else:
+        result2.to_excel(output,sheet_name='Cursos')
+        workbook = output.Workbook(output, {'in_memory': True})
+        worksheet = workbook.add_worksheet('Cursos')
+        workbook.close()
+        st.download_button(
+                label="Descarga Excel",
+                    data=output.getvalue(),
+                    file_name='Recomendación_'+str(document)+'.xlsx',
+                    mime="application/vnd.ms-excel")
+        st.table(result)
+        csv = convert_df(result2)
     st.download_button(
-     label="Descargue CSV",
-     data=csv,
-     file_name='Recomendación_'+str(document)+'.csv',
-     mime='text/csv')
+            label="Descargue CSV",
+            data=csv,
+            file_name='Recomendación_'+str(document)+'.csv',
+            mime='text/csv')
