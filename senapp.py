@@ -98,6 +98,7 @@ if(st.button('Submit')):
     result,result2 = recomendador(name,number)
     result=pd.DataFrame(result)
     st.table(result)
+    result2=pd.DataFrame(result2)
     csv = convert_df(result2)
     st.download_button(
      label="Descargue CSV",
