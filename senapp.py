@@ -108,25 +108,21 @@ if(st.button('Submit')):
     else:
         workbook = xlsxwriter.Workbook(output, {'in_memory': True})
         worksheet = workbook.add_worksheet('Cursos')
-        worksheet.write_column('A1', result2.columns)
-        worksheet.write_column('B1', result2['Proveedor'])
-        worksheet.write_column('C1', result2['Descripción del curso'])
-        worksheet.write_column('D1', result2['Nombre del curso (MINUSC)'])
-        worksheet.write_column('E1', result2['Número de horas de la formación'])
-        worksheet.write_column('F1', result2['Tipo de certificado'])
-        worksheet.write_column('G1', result2['Temática'])
-        worksheet.write_column('H1', result2['Grupo'])
-        worksheet.write_column('I1', result2['Sector de oportunidad ocupacional'])
+        worksheet.write('A1', result2.columns)
+        worksheet.write_column('B2', result2['Proveedor'])
+        worksheet.write_column('C2', result2['Descripción del curso'])
+        worksheet.write_column('D2', result2['Nombre del curso (MINUSC)'])
+        worksheet.write_column('E2', result2['Número de horas de la formación'])
+        worksheet.write_column('F2', result2['Tipo de certificado'])
+        worksheet.write_column('G2', result2['Temática'])
+        worksheet.write_column('H2', result2['Grupo'])
+        worksheet.write_column('I2', result2['Sector de oportunidad ocupacional'])
         workbook.close()
-        st.download_button(
-                label="Descarga Excel",
-                    data=output.getvalue(),
-                    file_name='Recomendación_'+str(document)+'.xlsx',
-                    mime="application/vnd.ms-excel")
+
         st.table(result)
         csv = convert_df(result2)
-    st.download_button(
-            label="Descargue Excel",
-            data=csv,
-            file_name='Recomendación_'+str(document)+'.xlsx',
-            mime='text/csv')
+        st.download_button(
+                label="Descarga Excel",
+                data=output.getvalue(),
+                file_name='Recomendación_'+str(document)+'.xlsx',
+                mime="application/vnd.ms-excel")
