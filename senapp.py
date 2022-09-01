@@ -80,11 +80,11 @@ def recomendador(j,n):
         
     except:
         return ["Nada que recomendar"]
-        
+
 st.title("RECOMENDACIÓN CURSOS SENA")
 st.header("Grupo de Analítica SDDE")
-name = st.text_input("Ingrese un perfil, una vacante o una descripción breve de sus intereses", "Type Here ...")
-number = st.number_input('Cuantos cursos desea recomendar', min_value=1, max_value=20, value=1)
+name = st.text_input("Ingrese un perfil, una vacante o una descripción breve de sus intereses: ", "")
+number = st.number_input('Cuantos cursos desea recomendar: ', min_value=1, max_value=20, value=1)
 if(st.button('Submit')):
     result = recomendador(name,number)
     result=pd.DataFrame(result)
