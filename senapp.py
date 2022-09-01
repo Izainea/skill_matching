@@ -7,6 +7,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 import streamlit as st
 import re
 from io import BytesIO
+from pyxlsb import open_workbook as open_xlsb
 
 sw=pd.read_csv('https://raw.githubusercontent.com/Izainea/skill_matching/main/data/sw.csv')
 sw=list(sw['vacias'])
@@ -113,8 +114,9 @@ if(st.button('Submit')):
     result=pd.DataFrame(result)
     st.table(result)
     result2=pd.DataFrame(result2)
-    csv = to_excel(result2)
+    csv = convert_df(result2)
     st.download_button(
      label="Descargue CSV",
      data=csv,
-     file_name='Recomendación_'+str(document)+'.csv')
+     file_name='Recomendación_'+str(document)+'.csv',
+     mime='text/csv')
