@@ -6,7 +6,6 @@ from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.feature_extraction.text import CountVectorizer
 import streamlit as st
 import re
-from io import BytesIO
 
 sw=pd.read_csv('https://raw.githubusercontent.com/Izainea/skill_matching/main/data/sw.csv')
 sw=list(sw['vacias'])
@@ -90,19 +89,6 @@ def convert_df(df):
      # IMPORTANT: Cache the conversion to prevent computation on every rerun
      return df.to_csv().encode('utf-8')
 
-
-def to_excel(df):
-    output = BytesIO()
-    writer = pd.ExcelWriter(output, engine='xlsxwriter')
-    df.to_excel(writer, index=False, sheet_name='Sheet1')
-    workbook = writer.book
-    worksheet = writer.sheets['Sheet1']
-    format1 = workbook.add_format({'num_format': '0.00'}) 
-    worksheet.set_column('A:A', None, format1)  
-    writer.save()
-    processed_data = output.getvalue()
-    return processed_data
-
 st.title("RECOMENDACIÓN CURSOS SENA")
 st.header("Grupo de Analítica SDDE")
 document=st.number_input('Documento de interesado: ', min_value=1000000, max_value=10000000000,value=1000000000)
@@ -112,7 +98,6 @@ if(st.button('Submit')):
     result,result2 = recomendador(name,number)
     result=pd.DataFrame(result)
     st.table(result)
-    result2=pd.DataFrame(result2)
     csv = convert_df(result2)
     st.download_button(
      label="Descargue CSV",
