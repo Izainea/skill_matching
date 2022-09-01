@@ -93,7 +93,7 @@ document=st.number_input('Documento de interesado: ', min_value=1000000, max_val
 name = st.text_input("Ingrese un perfil, una vacante o una descripción breve de sus intereses: ", "")
 number = st.number_input('Cuantos cursos desea recomendar: ', min_value=1, max_value=20, value=5)
 if(st.button('Submit')):
-    result = recomendador(name,number,document)
+    result = recomendador(name,number)
     result=pd.DataFrame(result)
     st.table(result)
     csv = convert_df(result)
